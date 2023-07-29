@@ -1,0 +1,53 @@
+.bigHeader{
+
+    font-size: 7rem;
+}
+.nav-link:hover {
+    cursor:pointer; 
+}
+.col{
+    display:flex; 
+    justify-content:space-around; 
+    align-items: stretch;
+    justify-items: stretch;
+
+}
+
+.card{
+
+border-radius: 10%;
+text-align:center; 
+align-items:center
+}
+
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.weath-card {
+    background-color: whitesmoke;
+    border-style: none;
+    justify-content: space-around;
+    opacity: 0.75;
+}
+
+.weath-card:nth-child(1) {
+    transform: translateY(20px);
+}
+.weath-card:nth-child(3) {
+    transform: translateY(20px);
+}
+.weath-card:nth-child(4) {
+    transform: translateY(20px);
+}
+.weath-card:nth-child(6) {
+    transform: translateY(20px);
+}
+.weath-card:hover {
+    opacity:1;
+}
+
+.credit{
+    color:red;
+}
