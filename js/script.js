@@ -57,10 +57,7 @@ async function getLocalWeather()  {
         (position) => {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-        const p = document.createElement("p");
-        p.innerHTML = `lat: ${lat} + lon: ${lon}`
-        getWeatherbyLatLon(lat,lon)
-        document.body.appendChild(p)},
+        getWeatherbyLatLon(lat,lon)},
     (error) => { window.alert("Error getting user location", error);})
  
     
@@ -112,38 +109,43 @@ function populateWeather(json){
         populated = true;
         let image = json.weather[0].id;
         let background = ""
+        console.log(image)
+        console.log(json)
         if (200 <= image <=232){
+           
             background = "url(./static/images/thunderstorm.jpg)"
         }
-        if (300<= image <= 321){
+        else if (300<= image <= 321){
             background = "url(./static/images/drizzle.jpg)"
         }
-        if (500 <= image <= 531){
+        else if (500 <= image <= 531){
+
             background = "url(./static/images/rain.jpg)"
 
         }
-        if (600 <= image <= 622){
+        else if (600 <= image <= 622){
             background = "url(./static/images/Snow.jpg)"
         }
-        if (701 <= image <= 781){
+        else if (701 <= image <= 781){
             background = "url(./static/images/fog.jpg)"
 
         }
-        if (image == 800){
+        else if (image == 800){
             background = "url(./static/images/sunny.webp)"
         }
-        if (image >800){
+        else{
             background = "url(./static/images/cloudy.jpg)"
 
         }
+        
         document.querySelector("#location").innerHTML = `Location: ${json.name}, ${countryDictionary[json.sys.country]}`
-        document.querySelector("#main_temp").innerHTML = ` ${json.main.temp}\xB0`
-        document.querySelector("#low_temp").innerHTML = `Low Temp: ${json.main.temp_min}\xB0`
-        document.querySelector("#high_temp").innerHTML = `${json.main.temp_max}\xB0`
+        document.querySelector("#main_temp").innerHTML = ` ${Math.round(json.main.temp)}\xB0`
+        document.querySelector("#low_temp").innerHTML = `Low Temp: ${Math.round(json.main.temp_min)}\xB0`
+        document.querySelector("#high_temp").innerHTML = `${Math.round(json.main.temp_max)}\xB0`
         document.querySelector("#forecast").innerHTML = `Forecast: ${titleCase(json.weather[0].description)}`
         document.querySelector("#forecast_icon").src = `https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`
         document.querySelector("#Humidity").innerHTML = `Humidity: ${json.main.humidity}%`
-        document.querySelector("#feels_like").innerHTML = `${json.main.feels_like}\xB0`
+        document.querySelector("#feels_like").innerHTML = `${Math.round(json.main.feels_like)}\xB0`
         document.body.style.backgroundImage = background;
     }   
 
