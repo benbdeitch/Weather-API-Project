@@ -69,11 +69,15 @@ locForm.addEventListener('submit', async (e) => {
     let city = locForm.city.value
     let url = "";
     console.log(country)
+    let withCountry = false;
     if (country == "default"){
         url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
+         ;
     }
     else{
+        
         url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${API_KEY}&units=imperial`;
+         withCountry = true;
         
     }
 
@@ -81,8 +85,14 @@ locForm.addEventListener('submit', async (e) => {
     if (response.ok){
     const data = await response.json()
     console.log(data)
+    if (withCountry){
     getWeatherbyLatLon(data[0].lat, data[0].lon)
-
+    }
+    else{
+        toWeather()
+        populateWeather(data)
+        
+    }
     }
     else{
         window.alert("City not found.")
