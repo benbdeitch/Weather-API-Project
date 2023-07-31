@@ -111,33 +111,35 @@ function populateWeather(json){
         let background = ""
         console.log(image)
         console.log(json)
-        if (200 <= image <=232){
+        image = parseInt(image)
+        if (200 <= image && image  <=232){
            
             background = "url(./static/images/thunderstorm.jpg)"
         }
-        else if (300<= image <= 321){
+        else if (300<= image && image <= 321){
             background = "url(./static/images/drizzle.jpg)"
         }
-        else if (500 <= image <= 531){
+        else if (500 <= image && image  <= 531){
 
             background = "url(./static/images/rain.jpg)"
 
         }
-        else if (600 <= image <= 622){
+        else if (600 <= image && image <= 622){
             background = "url(./static/images/Snow.jpg)"
         }
-        else if (701 <= image <= 781){
+        else if (701 <= image && image <= 781){
             background = "url(./static/images/fog.jpg)"
 
         }
         else if (image == 800){
             background = "url(./static/images/sunny.webp)"
         }
-        else{
+        else if (800 < image){
             background = "url(./static/images/cloudy.jpg)"
 
         }
-        
+        document.querySelector("#rise-time").innerHTML = new Date((json.timezone +14400+ json.sys.sunrise) *1000).toLocaleTimeString()
+        document.querySelector("#set-time").innerHTML = new Date((json.timezone +14400 +json.sys.sunset)*1000).toLocaleTimeString()
         document.querySelector("#location").innerHTML = `Location: ${json.name}, ${countryDictionary[json.sys.country]}`
         document.querySelector("#main_temp").innerHTML = ` ${Math.round(json.main.temp)}\xB0`
         document.querySelector("#low_temp").innerHTML = `Low Temp: ${Math.round(json.main.temp_min)}\xB0`

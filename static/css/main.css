@@ -2,6 +2,14 @@
 
     font-size: 7rem;
 }
+
+.header{
+    background-color:black;
+    color:grey;
+    padding:2rem;
+    border-radius: 20%;
+    opacity:0.85;
+}
 .nav-link:hover {
     cursor:pointer; 
 }
@@ -23,31 +31,64 @@ align-items:center
 body{
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: url("../images/background.webp");
 }
 
 .weath-card {
-    background-color: whitesmoke;
+    background-color: black;
+    color: white;
     border-style: none;
     justify-content: space-around;
     opacity: 0.75;
+    min-width: 4rem;
 }
 
 .weath-card:nth-child(1) {
-    transform: translateY(20px);
+    transform: translateY(8rem);
 }
 .weath-card:nth-child(3) {
-    transform: translateY(20px);
+    transform: translateY(8rem);
 }
 .weath-card:nth-child(4) {
-    transform: translateY(20px);
+    transform: translateY(8rem);
 }
 .weath-card:nth-child(6) {
-    transform: translateY(20px);
+    transform: translateY(8rem);
 }
-.weath-card:hover {
+.weath-card:hover, .sunrise:hover, .sunset:hover {
     opacity:1;
 }
 
 .credit{
     color:red;
+}
+
+.sunrise, .sunset{ 
+    text-align:center;
+    color: whitesmoke;
+    background-color:black;
+    border-radius:50%;
+    opacity: 0.75; 
+    padding: 2rem; 
+}
+
+.sunrise{
+    transform:  translate(-16rem) translateY(-17rem);
+}
+.sunset{
+    transform:  translate(16rem) translateY(-17rem);
+}
+.sun-icon{
+    height:100px; 
+}
+
+@media (max-width: 1300px){
+    .sunrise{
+        transform: translateY(4rem);
+    }
+     .sunset{
+        transform: translate(3rem) translateY(4rem);
+        
+     }
+
 }
