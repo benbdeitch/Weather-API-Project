@@ -13,12 +13,12 @@ const locForm = document.getElementById("loc_form")
 ///search box initialization
 const searchBox = document.getElementById("searchBox")
 const countryBar = document.getElementById("countrybar")
-/*for (let i = 0; i<countryCodes.length; i++){
+for (let i = 0; i<countryCodes.length; i++){
     const option = document.createElement("option")
     option.value = countryCodes[i].Code;
     option.innerHTML = countryCodes[i].Name;
     countryBar.appendChild(option)
-}*/
+}
 let countryDictionary = {}
 for (let i = 0; i<countryCodes.length; i++){
     countryDictionary[countryCodes[i].Code] = countryCodes[i].Name;
@@ -65,23 +65,24 @@ async function getLocalWeather()  {
 locForm.addEventListener('submit', async (e) => {
     e.preventDefault() 
     console.log("hello")
-    //let country = locForm.country.value
+    let country = locForm.country.value
     let city = locForm.city.value
     let url = "";
-    //if (country = "default"){
+    console.log(country)
+    if (country == "default"){
         url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
-    /*}
+    }
     else{
-        url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit={1}&appid=${API_KEY}&units=imperial`;
+        url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${API_KEY}&units=imperial`;
         
-    }*/
+    }
 
     const response = await fetch(url)
     if (response.ok){
     const data = await response.json()
     console.log(data)
-    toWeather()
-    populateWeather(data)
+    getWeatherbyLatLon(data[0].lat, data[0].lon)
+
     }
     else{
         window.alert("City not found.")
@@ -95,10 +96,12 @@ async function getWeatherbyLatLon(lat, lon){
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=imperial`);
     if (response.ok){
         console.log(response)
-        toWeather()
+        populated = true
         const json = await response.json();
         console.log(json)
+        toWeather()
         populateWeather(json)
+
     }
     else{
         window.alert("Error. Unsuccessful call.")
@@ -158,9 +161,7 @@ function toWeather(){
     currentLink.classList.add("active")
     mainPage.remove()
     document.body.appendChild(displayWeather)
-    if (!populated){
-        getLocalWeather()
-    }
+
 }
 
 function toMainPage(){
